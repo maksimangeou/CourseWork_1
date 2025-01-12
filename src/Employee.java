@@ -37,7 +37,7 @@ public class Employee {
         return id;
     }
     //статические методы
-    public static int getNextID() {
+    public int getNextID() {
         return nextID;
     }
     //сеттеры
@@ -77,7 +77,10 @@ public class Employee {
                 salary = otherEmployee.salary;
     } */
     //hashCode
-
+    public int hashCode() {
+        return new Integer(id).hashCode()+ lastName.hashCode()+firstName.hashCode()+patronymicName.hashCode()+
+                department.hashCode()+ new Double(salary).hashCode();
+    }
     //увеличение зп
     public void increaseSalary (double percent) {
        salary += salary*percent/100;
