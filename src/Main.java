@@ -12,7 +12,7 @@ public class Main {
         //добавить произвольные данные сотрудников
         Random r = new Random();
         for (int i = 1; i<= employee.length;i++) {
-            employee[i-1] = new Employee("Фамилия "+i,"Имя "+i,"Отчество "+
+            employee[i-1] = new Employee("Фамилия_"+i,"Имя_"+i,"Отчество_"+
                     i,Integer.toString(r.nextInt(5)+1),r.nextInt(10)*1000+i*1000);
         }
         System.out.println("==СПИСОК СОТРУДНИКОВ==");
@@ -25,6 +25,8 @@ public class Main {
         getMaxSalary(employee);
         System.out.println("==СРЕДНЯЯ ЗАРПЛАТА==");
         System.out.println("Средняя зарплата - "+getAvgSalary(employee));
+        System.out.println("==ФИО ВСЕХ СОТРУДНИКОВ==");
+        getOnlyFIOName(employee);
         for (Employee employee1: employee) {
             System.out.println(employee1.hashCode());
         }
@@ -71,6 +73,13 @@ public class Main {
     }
     public static double getAvgSalary(Employee[] e) {
         double avgSal = getTotalSumSalary(e)/(Employee.getNextID()-1);
-        return avgSal;
+        return Math.ceil(avgSal*100)/100;
+    }
+    public static void getOnlyFIOName(Employee[] e) {
+        String str;
+        for(Employee employee: e) {
+            str = employee.getLastName()+" "+employee.getFirstName()+" "+employee.getPatronymicName();
+            System.out.println(str);
+        }
     }
 }

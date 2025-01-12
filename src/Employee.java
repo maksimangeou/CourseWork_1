@@ -44,7 +44,7 @@ public class Employee {
     //сеттеры
     public void setId() {
         id = nextID;
-        nextID++;
+        setNextID();
     }
     public void setLastName(String lName) {
         lastName = lName;
@@ -63,6 +63,9 @@ public class Employee {
     }
     public void setSalary(double salary) {
         this.salary = salary;
+    }
+    public static void setNextID() {
+        nextID++;
     }
     //equals
     @Override
@@ -95,9 +98,4 @@ public class Employee {
         str = id+" "+lastName+" "+firstName+" "+patronymicName+" "+department+" "+salary;
         return str;
     }
-    //увеличение зп
-    public void increaseSalary (double percent) {
-       salary += salary*percent/100;
-    }
-
 }
