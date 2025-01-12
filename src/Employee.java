@@ -10,14 +10,12 @@ public class Employee {
     private static int nextID = 1;
     //конструктор
     public Employee(String lName,String fName,String pName,String dep,double sal) {
-        //this.id = getNextID();
         setId();
         setLastName(lName);
         setFirstName(fName);
         setPatronymicName(pName);
         setDepartment(dep);
         setSalary(sal);
-
     }
     //геттеры
     public String getFirstName() {
@@ -38,6 +36,7 @@ public class Employee {
     public int getId() {
         return id;
     }
+    //статические методы
     public static int getNextID() {
         return nextID;
     }
@@ -58,16 +57,25 @@ public class Employee {
     public void setDepartment(String department) {
         switch (department) {
             case "1", "3", "2", "4", "5": this.department = department; break;
-            default: System.out.println("Error");
+            default: this.department = "без отдела";
         }
     }
     public void setSalary(double salary) {
         this.salary = salary;
     }
     //equals
-    public boolean equals(Employee other) {
-        return true; //TODO доработать метод. Пока только набросок
-    }
+    /** TODO Необходимо подумать и разработать метод сравнения. Вопрос: по каким критериям необходимо сравнивать?
+    public boolean equals(Object other) {
+        if (this == other) return true;
+        if (other == null) return false;
+        if (getClass() != other.getClass()) return false;
+        Employee otherEmployee = (Employee) other;
+        return lastName.equals(otherEmployee.lastName) &&
+                firstName.equals(otherEmployee.firstName) &&
+                patronymicName.equals(otherEmployee.patronymicName) &&
+                department.equals(otherEmployee.department) &&
+                salary = otherEmployee.salary;
+    } */
     //hashCode
 
     //увеличение зп
