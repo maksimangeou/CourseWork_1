@@ -12,11 +12,11 @@ public class Employee {
     public Employee(String lName,String fName,String pName,String dep,double sal) {
         //this.id = getNextID();
         setId();
-        lastName = lName;
-        firstName = fName;
-        patronymicName = pName;
-        department =dep;
-        salary = sal;
+        setLastName(lName);
+        setFirstName(fName);
+        setPatronymicName(pName);
+        setDepartment(dep);
+        setSalary(sal);
 
     }
     //геттеры
@@ -46,8 +46,23 @@ public class Employee {
         id = nextID;
         nextID++;
     }
-    public void setSalary() {
-
+    public void setLastName(String lName) {
+        lastName = lName;
+    }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+    public void setPatronymicName(String patronymicName) {
+        this.patronymicName = patronymicName;
+    }
+    public void setDepartment(String department) {
+        switch (department) {
+            case "1", "3", "2", "4", "5": this.department = department; break;
+            default: System.out.println("Error");
+        }
+    }
+    public void setSalary(double salary) {
+        this.salary = salary;
     }
     //equals
     public boolean equals(Employee other) {

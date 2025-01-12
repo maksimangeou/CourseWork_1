@@ -9,7 +9,7 @@ public class Main {
         employee[4] = new Employee("Зад","Макс","Петр","2",150000.0);
         employee[5] = new Employee("Зад","Макс","Петр","2",150000.0);
         employee[6] = new Employee("Зад","Макс","Петр","2",150000.0);
-        employee[7] = new Employee("Зад","Макс","Петр","2",150000.0);
+        employee[7] = new Employee("Зад","Макс","Петр","6",150000.0);
         employee[8] = new Employee("Зад","Макс","Петр","2",150000.0);
         employee[9] = new Employee("Зад","Макс","Петр","2",150000.0);
         for (int i=0; i<10;i++) {
