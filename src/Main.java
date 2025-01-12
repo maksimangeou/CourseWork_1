@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        //массив-хранилище объектов "сотрудник". индекс массива из командной строки?
+        //Хранилище объектов "сотрудник". Индекс массива из командной строки
         System.out.print("Введите размер хранилища целочисленное значение: ");
         Scanner scn = new Scanner(System.in);
         int index = scn.nextInt();
@@ -23,21 +23,15 @@ public class Main {
             System.out.println(employee1.hashCode());
         }
     }
-    public static void getEmployee (Employee[] e) {
+    public static void getEmployee(Employee[] e) {
         for (Employee employee : e) {
-            System.out.println(employee.getId() + " " +
-                    employee.getLastName() + " " +
-                    employee.getFirstName() + " " +
-                    employee.getPatronymicName() + " " +
-                    employee.getDepartment() + " " + employee.getSalary()
-            );
+            System.out.println(employee.toString());
         }
     }
     public static void getMinSalary(Employee[] e) {
         System.out.println("==МИНИМАЛЬНАЯ ЗАРПЛАТА==");
-        double minSalary;
-        minSalary = e[0].getSalary();
-        for(int i=1; i<e.length;i++) {
+        double minSalary = Integer.MAX_VALUE;
+        for(int i=0; i<e.length;i++) {
             if(minSalary > e[i].getSalary()) {
                 minSalary = e[i].getSalary();
             }
@@ -51,9 +45,8 @@ public class Main {
     }
     public static void getMaxSalary(Employee[] e) {
         System.out.println("==МАКСИМАЛЬНАЯ ЗАРПЛАТА==");
-        double maxSalary;
-        maxSalary = e[0].getSalary();
-        for(int i=1; i<e.length;i++) {
+        double maxSalary = Integer.MIN_VALUE;
+        for(int i=0; i<e.length;i++) {
             if(maxSalary < e[i].getSalary()) {
                 maxSalary = e[i].getSalary();
             }

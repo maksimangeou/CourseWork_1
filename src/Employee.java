@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Employee {
     //объявление переменных класса
     private String firstName;
@@ -36,7 +38,6 @@ public class Employee {
     public int getId() {
         return id;
     }
-    //статические методы
     public int getNextID() {
         return nextID;
     }
@@ -67,15 +68,14 @@ public class Employee {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Employee)) return false;
+        if (!(o instanceof Employee e)) return false;
 
-        Employee employee = (Employee) o;
-        if (id != employee.id) return false;
-        if (lastName != null ? !lastName.equals(employee.lastName): employee.lastName !=null) return false;
-        if (firstName != null ? !firstName.equals(employee.firstName): employee.firstName !=null) return false;
-        if (patronymicName != null ? !patronymicName.equals(employee.patronymicName): employee.patronymicName !=null) return false;
-        if (department != null ? !department.equals(employee.department): employee.department !=null) return false;
-        return salary == employee.salary;
+        if (id != e.id) return false;
+        if (!Objects.equals(lastName, e.lastName)) return false;
+        if (!Objects.equals(firstName, e.firstName)) return false;
+        if (!Objects.equals(patronymicName, e.patronymicName)) return false;
+        if (!Objects.equals(department, e.department)) return false;
+        return salary == e.salary;
     }
     //hashCode
     @Override
@@ -87,6 +87,13 @@ public class Employee {
         i = 31*i+(department != null? department.hashCode():0);
         i = 31*i+(new Double(salary).hashCode());
         return i;
+    }
+    //toString
+    @Override
+    public String toString() {
+        String str;
+        str = id+" "+lastName+" "+firstName+" "+patronymicName+" "+department+" "+salary;
+        return str;
     }
     //увеличение зп
     public void increaseSalary (double percent) {
