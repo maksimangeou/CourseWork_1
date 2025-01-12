@@ -15,10 +15,16 @@ public class Main {
             employee[i-1] = new Employee("Фамилия "+i,"Имя "+i,"Отчество "+
                     i,Integer.toString(r.nextInt(5)+1),r.nextInt(10)*1000+i*1000);
         }
+        System.out.println("==СПИСОК СОТРУДНИКОВ==");
         getEmployee(employee);
+        System.out.println("==СУММА ЗАТРАТ НА ЗАРПЛАТУ==");
+        System.out.println("Затраты на зарплату - "+getTotalSumSalary(employee));
+        System.out.println("==МИНИМАЛЬНАЯ ЗАРПЛАТА==");
         getMinSalary(employee);
+        System.out.println("==МАКСИМАЛЬНАЯ ЗАРПЛАТА==");
         getMaxSalary(employee);
-        getAvgSalary(employee);
+        System.out.println("==СРЕДНЯЯ ЗАРПЛАТА==");
+        System.out.println("Средняя зарплата - "+getAvgSalary(employee));
         for (Employee employee1: employee) {
             System.out.println(employee1.hashCode());
         }
@@ -29,7 +35,6 @@ public class Main {
         }
     }
     public static void getMinSalary(Employee[] e) {
-        System.out.println("==МИНИМАЛЬНАЯ ЗАРПЛАТА==");
         double minSalary = Integer.MAX_VALUE;
         for(int i=0; i<e.length;i++) {
             if(minSalary > e[i].getSalary()) {
@@ -44,7 +49,6 @@ public class Main {
         }
     }
     public static void getMaxSalary(Employee[] e) {
-        System.out.println("==МАКСИМАЛЬНАЯ ЗАРПЛАТА==");
         double maxSalary = Integer.MIN_VALUE;
         for(int i=0; i<e.length;i++) {
             if(maxSalary < e[i].getSalary()) {
@@ -58,13 +62,15 @@ public class Main {
             }
         }
     }
-    public static void getAvgSalary(Employee[] e) {
-        System.out.println("==СРЕДНЯЯ ЗАРПЛАТА==");
-        double avgSal =0.0;
+    public static double getTotalSumSalary(Employee[] e) {
+        double totalSum =0.0;
         for (Employee employee : e) {
-            avgSal += employee.getSalary();
+            totalSum += employee.getSalary();
         }
-        avgSal /=e.length;
-        System.out.println("Средняя зарплата - "+avgSal);
+        return totalSum;
+    }
+    public static double getAvgSalary(Employee[] e) {
+        double avgSal = getTotalSumSalary(e)/(Employee.getNextID()-1);
+        return avgSal;
     }
 }

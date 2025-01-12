@@ -38,7 +38,7 @@ public class Employee {
     public int getId() {
         return id;
     }
-    public int getNextID() {
+    public static int getNextID() {
         return nextID;
     }
     //сеттеры
