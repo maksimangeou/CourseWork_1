@@ -1,20 +1,9 @@
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
         Employee[] employee = new Employee[10];
-
-        /*employee[0] = new Employee("Задорожный","Максим","Петрович","1",150000.0);
-        employee[1] = new Employee("Зад","Макс","Петр","2",150000.0);
-        employee[2] = new Employee("Зад","Макс","Петр","2",150000.0);
-        employee[3] = new Employee("Зад","Макс","Петр","2",150000.0);
-        employee[4] = new Employee("Зад","Макс","Петр","2",150000.0);
-        employee[5] = new Employee("Зад","Макс","Петр","2",150000.0);
-        employee[6] = new Employee("Зад","Макс","Петр","2",150000.0);
-        employee[7] = new Employee("Зад","Макс","Петр","6",150000.0);
-        employee[8] = new Employee("Зад","Макс","Петр","2",150000.0);
-        employee[9] = new Employee("Зад","Макс","Петр","2",15.0);*/
+        //добавить произвольные данные сотрудников
         Random r = new Random();
         for (int i = 1; i<=10;i++) {
             employee[i-1] = new Employee("Фамилия "+i,"Имя "+i,"Отчество "+
@@ -23,6 +12,7 @@ public class Main {
         getEmployee(employee);
         getMinSalary(employee);
         getMaxSalary(employee);
+        getAvgSalary(employee);
     }
     public static void getEmployee (Employee[] e) {
         for (int i=0; i<10;i++) {
@@ -65,5 +55,14 @@ public class Main {
                         e[i].getFirstName() + " " + e[i].getPatronymicName());
             }
         }
+    }
+    public static void getAvgSalary(Employee[] e) {
+        System.out.println("==СРЕДНЯЯ ЗАРПЛАТА==");
+        double avgSal =0.0;
+        for(int i=0; i<10;i++) {
+            avgSal += e[i].getSalary();
+        }
+        avgSal /=10;
+        System.out.println("Средняя зарплата - "+avgSal);
     }
 }
