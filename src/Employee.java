@@ -64,22 +64,29 @@ public class Employee {
         this.salary = salary;
     }
     //equals
-    /** TODO Необходимо подумать и разработать метод сравнения. Вопрос: по каким критериям необходимо сравнивать?
-    public boolean equals(Object other) {
-        if (this == other) return true;
-        if (other == null) return false;
-        if (getClass() != other.getClass()) return false;
-        Employee otherEmployee = (Employee) other;
-        return lastName.equals(otherEmployee.lastName) &&
-                firstName.equals(otherEmployee.firstName) &&
-                patronymicName.equals(otherEmployee.patronymicName) &&
-                department.equals(otherEmployee.department) &&
-                salary = otherEmployee.salary;
-    } */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Employee)) return false;
+
+        Employee employee = (Employee) o;
+        if (id != employee.id) return false;
+        if (lastName != null ? !lastName.equals(employee.lastName): employee.lastName !=null) return false;
+        if (firstName != null ? !firstName.equals(employee.firstName): employee.firstName !=null) return false;
+        if (patronymicName != null ? !patronymicName.equals(employee.patronymicName): employee.patronymicName !=null) return false;
+        if (department != null ? !department.equals(employee.department): employee.department !=null) return false;
+        return salary == employee.salary;
+    }
     //hashCode
+    @Override
     public int hashCode() {
-        return new Integer(id).hashCode()+ lastName.hashCode()+firstName.hashCode()+patronymicName.hashCode()+
-                department.hashCode()+ new Double(salary).hashCode();
+        int i = id;
+        i = 31*i+(lastName != null? lastName.hashCode():0);
+        i = 31*i+(firstName != null? firstName.hashCode():0);
+        i = 31*i+(patronymicName != null? patronymicName.hashCode():0);
+        i = 31*i+(department != null? department.hashCode():0);
+        i = 31*i+(new Double(salary).hashCode());
+        return i;
     }
     //увеличение зп
     public void increaseSalary (double percent) {
