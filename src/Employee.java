@@ -5,13 +5,13 @@ public class Employee {
     private String firstName;
     private String lastName;
     private String patronymicName;
-    private String department;
+    private int department;
     private double salary;
     private int id;
     //статическая переменная
     private static int nextID = 1;
     //конструктор
-    public Employee(String lName,String fName,String pName,String dep,double sal) {
+    public Employee(String lName,String fName,String pName,int dep,double sal) {
         setId();
         setLastName(lName);
         setFirstName(fName);
@@ -29,7 +29,7 @@ public class Employee {
     public String getPatronymicName() {
         return patronymicName;
     }
-    public String getDepartment() {
+    public int getDepartment() {
         return department;
     }
     public double getSalary() {
@@ -55,10 +55,10 @@ public class Employee {
     public void setPatronymicName(String patronymicName) {
         this.patronymicName = patronymicName;
     }
-    public void setDepartment(String department) {
+    public void setDepartment(int department) {
         switch (department) {
-            case "1", "3", "2", "4", "5": this.department = department; break;
-            default: this.department = "без отдела";
+            case 1, 3, 2, 4, 5: this.department = department; break;
+            default: this.department = 0;
         }
     }
     public void setSalary(double salary) {
@@ -87,7 +87,7 @@ public class Employee {
         i = 31*i+(lastName != null? lastName.hashCode():0);
         i = 31*i+(firstName != null? firstName.hashCode():0);
         i = 31*i+(patronymicName != null? patronymicName.hashCode():0);
-        i = 31*i+(department != null? department.hashCode():0);
+        i = 31*i+(new Integer(department).hashCode());
         i = 31*i+(new Double(salary).hashCode());
         return i;
     }
