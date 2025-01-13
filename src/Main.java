@@ -1,22 +1,15 @@
-import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) {
+        Scanner scanPause = new Scanner(System.in);
         //Хранилище объектов "сотрудник". Индекс массива из командной строки
         System.out.print("Введите размер хранилища целочисленное значение: ");
         Scanner scn = new Scanner(System.in);
         int index = scn.nextInt();
         System.out.println();
-        Employee[] employee = new Employee[index];
-        //добавить произвольные данные сотрудников
-        Random r = new Random();
-        for (int i = 1; i<= employee.length;i++) {
-            employee[i-1] = new Employee("Фамилия_"+i,"Имя_"+i,"Отчество_"+
-                    i,(r.nextInt(5)+1),r.nextInt(10)*1000+i*1000);
-        }
-
-        //меню выбора
+        EmployeeBook eBook = new EmployeeBook(index);
         int choice; //переменная выбора меню
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -24,16 +17,19 @@ public class Main {
             System.out.println("|              MENU SELECTION               |");
             System.out.println("=============================================");
             System.out.println("|   1. Вывести список сотрудников           |");
-            System.out.println("|   2. Сумма затрат                         |");
-            System.out.println("|   3. Минимальная ЗП                       |");
-            System.out.println("|   4. Максимальная ЗП                      |");
-            System.out.println("|   5. Средняя ЗП                           |");
-            System.out.println("|   6. ФИО сотрудников                      |");
-            System.out.println("|   7. Индексация ЗП                        |");
-            System.out.println("|   8. Работа с отделами                    |");
-            System.out.println("|   9. Поиск специалистов с ЗП менее числа  |");
-            System.out.println("|   10. Поиск специалистов с ЗП более числа |");
-            System.out.println("|   11. Завершение работы                   |");
+            System.out.println("|   2. Добавить сотрудника в список         |");
+            System.out.println("|   3. Удалить сотрудника из списка         |");
+            System.out.println("|   4. Поиск специалиста по id              |");
+            System.out.println("|   5. Сумма затрат по ЗП                   |");
+            System.out.println("|   6. Минимальная ЗП                       |");
+            System.out.println("|   7. Максимальная ЗП                      |");
+            System.out.println("|   8. Средняя ЗП                           |");
+            System.out.println("|   9. ФИО сотрудников                      |");
+            System.out.println("|   10. Индексация ЗП                       |");
+            System.out.println("|   11. Работа с отделами                   |");
+            System.out.println("|   12. Поиск специалистов с ЗП менее числа |");
+            System.out.println("|   13. Поиск специалистов с ЗП более числа |");
+            System.out.println("|   14. Завершение работы                   |");
             System.out.println("=============================================");
             System.out.println("Enter your choice: ");
             choice = scanner.nextInt();
@@ -41,36 +37,69 @@ public class Main {
             switch (choice) {
                 case 1:
                     System.out.println("==СПИСОК СОТРУДНИКОВ==");
-                    getEmployee(employee);
+                    eBook.getEmployee();
+                    scanPause.nextLine();
                     break;
                 case 2:
-                    System.out.println("==СУММА ЗАТРАТ НА ЗАРПЛАТУ==");
-                    System.out.println("Затраты на зарплату - "+getTotalSumSalary(employee));
+                    System.out.println("==ДОБАВИТЬ СОТРУДНИКА В СПИСОК==");
+                    eBook.addEmployee();
+                    scanPause.nextLine();
                     break;
                 case 3:
-                    System.out.println("==МИНИМАЛЬНАЯ ЗАРПЛАТА==");
-                    getMinSalary(employee);
+                    System.out.println("==УДАЛИТЬ СОТРУДНИКА ИЗ СПИСКА==");
+                    System.out.println("Введите id сотрудника для удаления: ");
+                    Scanner scn1 = new Scanner(System.in);
+                    int i = scn1.nextInt();
+                    eBook.removeEmployee(i);
+                    scanPause.nextLine();
                     break;
                 case 4:
-                    System.out.println("==МАКСИМАЛЬНАЯ ЗАРПЛАТА==");
-                    getMaxSalary(employee);
+                    System.out.println("==ПОИСК СПЕЦИАЛИСТА==");
+                    System.out.println("Введите id сотрудника: ");
+                    Scanner scn5 = new Scanner(System.in);
+                    int id = scn5.nextInt();
+                    eBook.findEmployee(id);
+                    scanPause.nextLine();
                     break;
                 case 5:
-                    System.out.println("==СРЕДНЯЯ ЗАРПЛАТА==");
-                    System.out.println("Средняя зарплата - "+getAvgSalary(employee));
+                    System.out.println("==СУММА ЗАТРАТ НА ЗАРПЛАТУ==");
+                    System.out.println("Затраты на зарплату - "+eBook.getTotalSumSalary());
+                    System.out.println("Нажмите любую клавишу, чтобы продолжить");
+                    scanPause.nextLine();
                     break;
                 case 6:
-                    System.out.println("==ФИО ВСЕХ СОТРУДНИКОВ==");
-                    getOnlyFIOName(employee);
+                    System.out.println("==МИНИМАЛЬНАЯ ЗАРПЛАТА==");
+                    eBook.getMinSalary();
+                    System.out.println("Нажмите любую клавишу, чтобы продолжить");
+                    scanPause.nextLine();
                     break;
                 case 7:
-                    System.out.println("==ИНДЕКСАЦИЯ ЗП==");
-                    System.out.print("Введите величину изменения зп (в %): ");
-                    Scanner scn1 = new Scanner(System.in);
-                    double percent = scn1.nextInt();
-                    setIncreaseSalary(employee,percent);
+                    System.out.println("==МАКСИМАЛЬНАЯ ЗАРПЛАТА==");
+                    eBook.getMaxSalary();
+                    System.out.println("Нажмите любую клавишу, чтобы продолжить");
+                    scanPause.nextLine();
                     break;
                 case 8:
+                    System.out.println("==СРЕДНЯЯ ЗАРПЛАТА==");
+                    System.out.println("Средняя зарплата - "+eBook.getAvgSalary());
+                    System.out.println("Нажмите любую клавишу, чтобы продолжить");
+                    scanPause.nextLine();
+                    break;
+                case 9:
+                    System.out.println("==ФИО ВСЕХ СОТРУДНИКОВ==");
+                    eBook.getOnlyFIOName();
+                    System.out.println("Нажмите любую клавишу, чтобы продолжить");
+                    scanPause.nextLine();
+                    break;
+                case 10:
+                    System.out.println("==ИНДЕКСАЦИЯ ЗП==");
+                    System.out.print("Введите величину изменения зп (в %): ");
+                    Scanner scn2 = new Scanner(System.in);
+                    double percent = scn2.nextInt();
+                    eBook.setIncreaseSalary(percent);
+                    scanPause.nextLine();
+                    break;
+                case 11:
                     System.out.println("Введите номер отдела");
                     Scanner scanner1 = new Scanner(System.in);
                     int dep = scanner1.nextInt();
@@ -91,205 +120,82 @@ public class Main {
                         switch (choice) {
                             case 1:
                                 System.out.println("==СПИСОК СОТРУДНИКОВ ПО ОТДЕЛУ==");
-                                getEmployeeInDepart(employee,dep);
+                                eBook.getEmployeeInDepart(dep);
+                                System.out.println("Нажмите любую клавишу, чтобы продолжить");
+                                scanPause.nextLine();
                                 break;
                             case 2:
                                 System.out.println("==СУММА ЗАТРАТ НА ЗАРПЛАТУ ПО ОТДЕЛУ==");
-                                System.out.println("Затраты на зарплату в отделе"+dep+" - "+getTotalSumOfDepart(employee,dep));
+                                System.out.println("Затраты на зарплату в отделе"+dep+" - "+eBook.getTotalSumOfDepart(dep));
+                                System.out.println("Нажмите любую клавишу, чтобы продолжить");
+                                scanPause.nextLine();
                                 break;
                             case 3:
                                 System.out.println("==МИНИМАЛЬНАЯ ЗАРПЛАТА ПО ОТДЕЛУ==");
-                                getMinSalaryOfDepart(employee,dep);
+                                eBook.getMinSalaryOfDepart(dep);
+                                System.out.println("Нажмите любую клавишу, чтобы продолжить");
+                                scanPause.nextLine();
                                 break;
                             case 4:
                                 System.out.println("==МАКСИМАЛЬНАЯ ЗАРПЛАТА ПО ОТДЕЛУ==");
-                                getMaxSalaryOfDepart(employee,dep);
+                                eBook.getMaxSalaryOfDepart(dep);
+                                System.out.println("Нажмите любую клавишу, чтобы продолжить");
+                                scanPause.nextLine();
                                 break;
                             case 5:
                                 System.out.println("==СРЕДНЯЯ ЗАРПЛАТА ПО ОТДЕЛУ==");
-                                System.out.println("Средняя зарплата по отделу"+dep+" - "+getAvgSalaryInDepart(employee,dep));
+                                System.out.println("Средняя зарплата по отделу"+dep+" - "+eBook.getAvgSalaryInDepart(dep));
+                                System.out.println("Нажмите любую клавишу, чтобы продолжить");
+                                scanPause.nextLine();
                                 break;
                             case 6:
                                 System.out.println("==ИНДЕКСАЦИЯ ЗП==");
                                 System.out.print("Введите величину изменения зп (в %) по отделу: ");
                                 Scanner scn3 = new Scanner(System.in);
                                 double percentInDep = scn3.nextInt();
-                                setIncreaseSalaryInDepart(employee,dep,percentInDep);
+                                eBook.setIncreaseSalaryInDepart(dep,percentInDep);
+                                System.out.println("Нажмите любую клавишу, чтобы продолжить");
+                                scanPause.nextLine();
                                 break;
                             case 7:
                                 break EXTERNAL;
                             default:
                                 System.out.println("Введите корректное значения пункта меню");
+                                System.out.println("Нажмите любую клавишу, чтобы продолжить");
+                                scanPause.nextLine();
                                 break;
                         }
 
                     }
-                case 9:
+                case 12:
                     System.out.println("==СПЕЦИАЛИСТЫ С ЗП МЕНЕЕ ЗНАЧЕНИЯ==");
                     System.out.println("Введите значение для поиска:");
-                    Scanner scn2 = new Scanner(System.in);
-                    double valueMin = scn2.nextInt();
-                    getFindMinSalary(employee,valueMin);
-                case 10:
+                    Scanner scn3 = new Scanner(System.in);
+                    double valueMin = scn3.nextInt();
+                    eBook.getFindMinSalary(valueMin);
+                    System.out.println("Нажмите любую клавишу, чтобы продолжить");
+                    scanPause.nextLine();
+                    break;
+                case 13:
                     System.out.println("==СПЕЦИАЛИСТЫ С ЗП БОЛЕЕ ЗНАЧЕНИЯ==");
                     System.out.println("Введите значение для поиска:");
-                    Scanner scn3 = new Scanner(System.in);
-                    double valueMax= scn3.nextInt();
-                    getFindMaxSalary(employee,valueMax);
-                case 11:
+                    Scanner scn4 = new Scanner(System.in);
+                    double valueMax= scn4.nextInt();
+                    eBook.getFindMaxSalary(valueMax);
+                    System.out.println("Нажмите любую клавишу, чтобы продолжить");
+                    scanPause.nextLine();
+                    break;
+                case 14:
                     System.out.println("Работа завершена");
                     System.exit(0);
                 default:
                     System.out.println("Введите корректное значения пункта меню");
+                    System.out.println("Нажмите любую клавишу, чтобы продолжить");
+                    scanPause.nextLine();
                     break;
 
             }
         }
     }
-    public static void getEmployee(Employee[] e) {
-        for (Employee employee : e) {
-            System.out.println(employee.toString());
-        }
-    }
-    public static void getMinSalary(Employee[] e) {
-        double minSalary = Integer.MAX_VALUE;
-        for (Employee value : e) {
-            if (minSalary > value.getSalary()) {
-                minSalary = value.getSalary();
-            }
-        }
-        for (Employee employee : e) {
-            if (minSalary == employee.getSalary()) {
-                System.out.println("Сотрудник с минимальной зарплатой в " + minSalary + " - " + employee.getLastName() + " " +
-                        employee.getFirstName() + " " + employee.getPatronymicName());
-            }
-        }
-    }
-    public static void getMaxSalary(Employee[] e) {
-        double maxSalary = Integer.MIN_VALUE;
-        for (Employee value : e) {
-            if (maxSalary < value.getSalary()) {
-                maxSalary = value.getSalary();
-            }
-        }
-        for (Employee employee : e) {
-            if (maxSalary == employee.getSalary()) {
-                System.out.println("Сотрудник с максимальной зарплатой в " + maxSalary + " - " + employee.getLastName() + " " +
-                        employee.getFirstName() + " " + employee.getPatronymicName());
-            }
-        }
-    }
-    public static double getTotalSumSalary(Employee[] e) {
-        double totalSum =0.0;
-        for (Employee employee : e) {
-            totalSum += employee.getSalary();
-        }
-        return totalSum;
-    }
-    public static double getAvgSalary(Employee[] e) {
-        double avgSal = getTotalSumSalary(e)/(Employee.getNextID()-1);
-         avgSal = Math.ceil(avgSal*100)/100;
-        return avgSal;
-    }
-    public static void getOnlyFIOName(Employee[] e) {
-        String str;
-        for(Employee employee: e) {
-            str = employee.getLastName()+" "+employee.getFirstName()+" "+employee.getPatronymicName();
-            System.out.println(str);
-        }
-    }
-    public static void setIncreaseSalary(Employee[] e, double percent) {
-        for(Employee employee: e) {
-            double increase = employee.getSalary()*(100+percent)/100;
-            employee.setSalary(increase);
-        }
-        getEmployee(e);
-    }
-    public static void getMinSalaryOfDepart(Employee[] e, int d) {
-        double minSalary = Integer.MAX_VALUE;
-        for (Employee value : e) {
-            if (value.getDepartment() == d) {
-                if (minSalary > value.getSalary()) {
-                    minSalary = value.getSalary();
-                }
-            }
-        }
-        for (Employee employee : e) {
-            if ((minSalary == employee.getSalary())&&(d == employee.getDepartment())) {
-                System.out.println("Сотрудник с минимальной зарплатой в " + minSalary +
-                        " в отделе "+employee.getDepartment()+" - " +
-                        employee.getLastName() + " " +employee.getFirstName() + " " + employee.getPatronymicName());
-            }
-        }
-    }
-    public static void getMaxSalaryOfDepart(Employee[] e, int d) {
-        double maxSalary = Integer.MIN_VALUE;
-        for (Employee value : e) {
-            if (value.getDepartment() == d) {
-                if (maxSalary < value.getSalary()) {
-                    maxSalary = value.getSalary();
-                }
-            }
-        }
-        for (Employee employee : e) {
-            if ((maxSalary == employee.getSalary())&&(d == employee.getDepartment())) {
-                System.out.println("Сотрудник с максимальной зарплатой в " + maxSalary +
-                        " в отделе "+employee.getDepartment()+ " -  " + employee.getLastName() + " " +
-                        employee.getFirstName() + " " + employee.getPatronymicName());
-            }
-        }
-    }
-    public static double getTotalSumOfDepart(Employee[] e, int d) {
-        double totalSum = 0.0;
-        for (Employee employee: e) {
-            if (employee.getDepartment()==d) {
-                totalSum += employee.getSalary();
-            }
-        }
-        return totalSum;
-    }
-    public static double getAvgSalaryInDepart(Employee[] e, int d) {
-        int i = 0;
-        for(Employee employee:e) {
-            if(employee.getDepartment()==d) i++;
-        }
-        double avgSal = getTotalSumOfDepart(e,d)/i;
-        return Math.ceil(avgSal*100)/100;
-    }
-    public static void setIncreaseSalaryInDepart(Employee[] e, int d, double percent) {
-        for (Employee employee : e) {
-            if (employee.getDepartment() == d) {
-                double increase = employee.getSalary() * (100 + percent) / 100;
-                employee.setSalary(increase);
-                System.out.println(employee);
-            }
-        }
-    }
-    public static void getEmployeeInDepart(Employee[] e, int d) {
-        String str;
-        for (Employee employee : e)
-            if (employee.getDepartment() == d) {
-                str = employee.getId() + " " +employee.getLastName() + " " + employee.getFirstName() + " " +
-                        employee.getPatronymicName() + " " +employee.getSalary();
-                System.out.println(str);
-            }
-    }
-    public static void getFindMinSalary(Employee[] e, double value) {
-        for(Employee employee: e) {
-            if(employee.getSalary() < value) {
-                System.out.println("Сотрудники с ЗП меньше "+value+" - "+
-                        employee.getId()+" "+employee.getLastName()+" "+employee.getFirstName()+" "+
-                        employee.getPatronymicName()+" "+employee.getSalary());
-            }
-        }
-    }
-    public static void getFindMaxSalary(Employee[] e, double value) {
-        for(Employee employee: e) {
-            if(employee.getSalary() > value) {
-                System.out.println("Сотрудники с ЗП больше "+value+" - "+
-                        employee.getId()+" "+employee.getLastName()+" "+employee.getFirstName()+" "+
-                        employee.getPatronymicName()+" "+employee.getSalary());
-            }
-        }
-    }
+
 }

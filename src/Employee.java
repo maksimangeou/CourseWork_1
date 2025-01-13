@@ -44,7 +44,7 @@ public class Employee {
     //сеттеры
     public void setId() {
         id = nextID;
-        setNextID();
+        nextID++;
     }
     public void setLastName(String lName) {
         lastName = lName;
@@ -65,7 +65,7 @@ public class Employee {
         this.salary = salary;
     }
     public static void setNextID() {
-        nextID++;
+        --nextID;
     }
     //equals
     @Override
