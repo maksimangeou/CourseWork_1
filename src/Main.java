@@ -20,19 +20,21 @@ public class Main {
         int choice; //переменная выбора меню
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.println("==========================================");
-            System.out.println("|             MENU SELECTION             |");
-            System.out.println("==========================================");
-            System.out.println("|   1. Вывести список сотрудников        |");
-            System.out.println("|   2. Сумма затрат                      |");
-            System.out.println("|   3. Минимальная ЗП                    |");
-            System.out.println("|   4. Максимальная ЗП                   |");
-            System.out.println("|   5. Средняя ЗП                        |");
-            System.out.println("|   6. ФИО сотрудников                   |");
-            System.out.println("|   7. Индексация ЗП                     |");
-            System.out.println("|   8. Работа с отделами                 |");
-            System.out.println("|   9. Завершение работы                 |");
-            System.out.println("==========================================");
+            System.out.println("=============================================");
+            System.out.println("|              MENU SELECTION               |");
+            System.out.println("=============================================");
+            System.out.println("|   1. Вывести список сотрудников           |");
+            System.out.println("|   2. Сумма затрат                         |");
+            System.out.println("|   3. Минимальная ЗП                       |");
+            System.out.println("|   4. Максимальная ЗП                      |");
+            System.out.println("|   5. Средняя ЗП                           |");
+            System.out.println("|   6. ФИО сотрудников                      |");
+            System.out.println("|   7. Индексация ЗП                        |");
+            System.out.println("|   8. Работа с отделами                    |");
+            System.out.println("|   9. Поиск специалистов с ЗП менее числа  |");
+            System.out.println("|   10. Поиск специалистов с ЗП более числа |");
+            System.out.println("|   11. Завершение работы                   |");
+            System.out.println("=============================================");
             System.out.println("Enter your choice: ");
             choice = scanner.nextInt();
             EXTERNAL:
@@ -89,7 +91,7 @@ public class Main {
                         switch (choice) {
                             case 1:
                                 System.out.println("==СПИСОК СОТРУДНИКОВ ПО ОТДЕЛУ==");
-                                setEmployeeInDepart(employee,dep);
+                                getEmployeeInDepart(employee,dep);
                                 break;
                             case 2:
                                 System.out.println("==СУММА ЗАТРАТ НА ЗАРПЛАТУ ПО ОТДЕЛУ==");
@@ -123,6 +125,18 @@ public class Main {
 
                     }
                 case 9:
+                    System.out.println("==СПЕЦИАЛИСТЫ С ЗП МЕНЕЕ ЗНАЧЕНИЯ==");
+                    System.out.println("Введите значение для поиска:");
+                    Scanner scn2 = new Scanner(System.in);
+                    double valueMin = scn2.nextInt();
+                    getFindMinSalary(employee,valueMin);
+                case 10:
+                    System.out.println("==СПЕЦИАЛИСТЫ С ЗП БОЛЕЕ ЗНАЧЕНИЯ==");
+                    System.out.println("Введите значение для поиска:");
+                    Scanner scn3 = new Scanner(System.in);
+                    double valueMax= scn3.nextInt();
+                    getFindMaxSalary(employee,valueMax);
+                case 11:
                     System.out.println("Работа завершена");
                     System.exit(0);
                 default:
@@ -174,7 +188,8 @@ public class Main {
     }
     public static double getAvgSalary(Employee[] e) {
         double avgSal = getTotalSumSalary(e)/(Employee.getNextID()-1);
-        return Math.ceil(avgSal*100)/100;
+         avgSal = Math.ceil(avgSal*100)/100;
+        return avgSal;
     }
     public static void getOnlyFIOName(Employee[] e) {
         String str;
@@ -250,7 +265,7 @@ public class Main {
             }
         }
     }
-    public static void setEmployeeInDepart(Employee[] e, int d) {
+    public static void getEmployeeInDepart(Employee[] e, int d) {
         String str;
         for (Employee employee : e)
             if (employee.getDepartment() == d) {
@@ -258,5 +273,23 @@ public class Main {
                         employee.getPatronymicName() + " " +employee.getSalary();
                 System.out.println(str);
             }
+    }
+    public static void getFindMinSalary(Employee[] e, double value) {
+        for(Employee employee: e) {
+            if(employee.getSalary() < value) {
+                System.out.println("Сотрудники с ЗП меньше "+value+" - "+
+                        employee.getId()+" "+employee.getLastName()+" "+employee.getFirstName()+" "+
+                        employee.getPatronymicName()+" "+employee.getSalary());
+            }
+        }
+    }
+    public static void getFindMaxSalary(Employee[] e, double value) {
+        for(Employee employee: e) {
+            if(employee.getSalary() > value) {
+                System.out.println("Сотрудники с ЗП больше "+value+" - "+
+                        employee.getId()+" "+employee.getLastName()+" "+employee.getFirstName()+" "+
+                        employee.getPatronymicName()+" "+employee.getSalary());
+            }
+        }
     }
 }

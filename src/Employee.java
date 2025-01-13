@@ -87,15 +87,13 @@ public class Employee {
         i = 31*i+(lastName != null? lastName.hashCode():0);
         i = 31*i+(firstName != null? firstName.hashCode():0);
         i = 31*i+(patronymicName != null? patronymicName.hashCode():0);
-        i = 31*i+(new Integer(department).hashCode());
+        i = 31*i+(Integer.valueOf(department).hashCode());
         i = 31*i+(new Double(salary).hashCode());
         return i;
     }
     //toString
     @Override
     public String toString() {
-        String str;
-        str = id+" "+lastName+" "+firstName+" "+patronymicName+" "+department+" "+salary;
-        return str;
+        return id + " " + lastName + " " + firstName + " " + patronymicName + " " + department + " " + salary;
     }
 }
