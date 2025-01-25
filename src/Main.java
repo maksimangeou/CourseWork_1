@@ -4,12 +4,12 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanPause = new Scanner(System.in);
-        //Хранилище объектов "сотрудник". Индекс массива из командной строки
+        //Хранилище объектов "сотрудник". Размер массива из командной строки
         System.out.print("Введите размер хранилища целочисленное значение: ");
         Scanner scn = new Scanner(System.in);
-        int index = scn.nextInt();
+        int size = scn.nextInt();
         System.out.println();
-        EmployeeBook eBook = new EmployeeBook(index);
+        EmployeeBook eBook = new EmployeeBook(size);
         int choice; //переменная выбора меню
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -31,7 +31,7 @@ public class Main {
             System.out.println("|   13. Поиск специалистов с ЗП более числа |");
             System.out.println("|   14. Завершение работы                   |");
             System.out.println("=============================================");
-            System.out.println("Enter your choice: ");
+            System.out.println("Введите номер пункта меню: ");
             choice = scanner.nextInt();
             EXTERNAL:
             switch (choice) {
@@ -63,7 +63,7 @@ public class Main {
                     break;
                 case 5:
                     System.out.println("==СУММА ЗАТРАТ НА ЗАРПЛАТУ==");
-                    System.out.println("Затраты на зарплату - "+eBook.getTotalSumSalary());
+                    System.out.println("Затраты на зарплату - " + eBook.getTotalSumSalary());
                     System.out.println("Нажмите любую клавишу, чтобы продолжить");
                     scanPause.nextLine();
                     break;
@@ -81,7 +81,7 @@ public class Main {
                     break;
                 case 8:
                     System.out.println("==СРЕДНЯЯ ЗАРПЛАТА==");
-                    System.out.println("Средняя зарплата - "+eBook.getAvgSalary());
+                    System.out.println("Средняя зарплата - " + eBook.getAvgSalary());
                     System.out.println("Нажмите любую клавишу, чтобы продолжить");
                     scanPause.nextLine();
                     break;
@@ -115,7 +115,7 @@ public class Main {
                         System.out.println("|   6. Индексация ЗП ПО ОТДЕЛУ                     |");
                         System.out.println("|   7. Выход в главное меню                        |");
                         System.out.println("====================================================");
-                        System.out.println("Enter your choice: ");
+                        System.out.println("Введите номер пункта меню: ");
                         choice = scanner.nextInt();
                         switch (choice) {
                             case 1:
@@ -126,7 +126,7 @@ public class Main {
                                 break;
                             case 2:
                                 System.out.println("==СУММА ЗАТРАТ НА ЗАРПЛАТУ ПО ОТДЕЛУ==");
-                                System.out.println("Затраты на зарплату в отделе"+dep+" - "+eBook.getTotalSumOfDepart(dep));
+                                System.out.println("Затраты на зарплату в отделе" + dep + " - " + eBook.getTotalSumOfDepart(dep));
                                 System.out.println("Нажмите любую клавишу, чтобы продолжить");
                                 scanPause.nextLine();
                                 break;
@@ -144,7 +144,7 @@ public class Main {
                                 break;
                             case 5:
                                 System.out.println("==СРЕДНЯЯ ЗАРПЛАТА ПО ОТДЕЛУ==");
-                                System.out.println("Средняя зарплата по отделу"+dep+" - "+eBook.getAvgSalaryInDepart(dep));
+                                System.out.println("Средняя зарплата по отделу" + dep + " - " + eBook.getAvgSalaryInDepart(dep));
                                 System.out.println("Нажмите любую клавишу, чтобы продолжить");
                                 scanPause.nextLine();
                                 break;
@@ -153,7 +153,7 @@ public class Main {
                                 System.out.print("Введите величину изменения зп (в %) по отделу: ");
                                 Scanner scn3 = new Scanner(System.in);
                                 double percentInDep = scn3.nextInt();
-                                eBook.setIncreaseSalaryInDepart(dep,percentInDep);
+                                eBook.setIncreaseSalaryInDepart(dep, percentInDep);
                                 System.out.println("Нажмите любую клавишу, чтобы продолжить");
                                 scanPause.nextLine();
                                 break;
@@ -180,7 +180,7 @@ public class Main {
                     System.out.println("==СПЕЦИАЛИСТЫ С ЗП БОЛЕЕ ЗНАЧЕНИЯ==");
                     System.out.println("Введите значение для поиска:");
                     Scanner scn4 = new Scanner(System.in);
-                    double valueMax= scn4.nextInt();
+                    double valueMax = scn4.nextInt();
                     eBook.getFindMaxSalary(valueMax);
                     System.out.println("Нажмите любую клавишу, чтобы продолжить");
                     scanPause.nextLine();
