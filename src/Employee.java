@@ -86,31 +86,23 @@ public class Employee {
     }
 
     //equals
+
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null) return false;
-        if (getClass() != o.getClass()) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-
-        if (id != employee.id) return false;
-        if (!Objects.equals(lastName, employee.lastName)) return false;
-        if (!Objects.equals(firstName, employee.firstName)) return false;
-        if (!Objects.equals(patronymicName, employee.patronymicName)) return false;
-        if (!Objects.equals(department, employee.department)) return false;
-        return salary == employee.salary;
+        return department == employee.department &&
+                Double.compare(salary, employee.salary) == 0 &&
+                id == employee.id &&
+                Objects.equals(firstName, employee.firstName) &&
+                Objects.equals(lastName, employee.lastName) &&
+                Objects.equals(patronymicName, employee.patronymicName);
     }
 
-    //hashCode
     @Override
     public int hashCode() {
-        int i = id;
-        i = 31 * i + (lastName != null ? lastName.hashCode() : 0);
-        i = 31 * i + (firstName != null ? firstName.hashCode() : 0);
-        i = 31 * i + (patronymicName != null ? patronymicName.hashCode() : 0);
-        i = 31 * i + (Integer.valueOf(department).hashCode());
-        i = 31 * i + (new Double(salary).hashCode());
-        return i;
+        return Objects.hash(firstName, lastName, patronymicName, department, salary, id);
     }
 
     //toString

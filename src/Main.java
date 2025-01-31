@@ -63,31 +63,31 @@ public class Main {
                     break;
                 case 5:
                     System.out.println("==СУММА ЗАТРАТ НА ЗАРПЛАТУ==");
-                    System.out.println("Затраты на зарплату - " + eBook.getTotalSumSalary());
+                    System.out.println("Затраты на зарплату - " + eBook.countTotalSumSalary());
                     System.out.println("Нажмите любую клавишу, чтобы продолжить");
                     scanPause.nextLine();
                     break;
                 case 6:
                     System.out.println("==МИНИМАЛЬНАЯ ЗАРПЛАТА==");
-                    eBook.getMinSalary();
+                    eBook.findMinSalary();
                     System.out.println("Нажмите любую клавишу, чтобы продолжить");
                     scanPause.nextLine();
                     break;
                 case 7:
                     System.out.println("==МАКСИМАЛЬНАЯ ЗАРПЛАТА==");
-                    eBook.getMaxSalary();
+                    eBook.findMaxSalary();
                     System.out.println("Нажмите любую клавишу, чтобы продолжить");
                     scanPause.nextLine();
                     break;
                 case 8:
                     System.out.println("==СРЕДНЯЯ ЗАРПЛАТА==");
-                    System.out.println("Средняя зарплата - " + eBook.getAvgSalary());
+                    System.out.println("Средняя зарплата - " + eBook.findAvgSalary());
                     System.out.println("Нажмите любую клавишу, чтобы продолжить");
                     scanPause.nextLine();
                     break;
                 case 9:
                     System.out.println("==ФИО ВСЕХ СОТРУДНИКОВ==");
-                    eBook.getOnlyFIOName();
+                    eBook.getOnlyName();
                     System.out.println("Нажмите любую клавишу, чтобы продолжить");
                     scanPause.nextLine();
                     break;
@@ -96,7 +96,7 @@ public class Main {
                     System.out.print("Введите величину изменения зп (в %): ");
                     Scanner scn2 = new Scanner(System.in);
                     double percent = scn2.nextInt();
-                    eBook.setIncreaseSalary(percent);
+                    eBook.raiseSalary(percent);
                     scanPause.nextLine();
                     break;
                 case 11:
@@ -126,25 +126,25 @@ public class Main {
                                 break;
                             case 2:
                                 System.out.println("==СУММА ЗАТРАТ НА ЗАРПЛАТУ ПО ОТДЕЛУ==");
-                                System.out.println("Затраты на зарплату в отделе" + dep + " - " + eBook.getTotalSumOfDepart(dep));
+                                System.out.println("Затраты на зарплату в отделе" + dep + " - " + eBook.countTotalSumOfDepart(dep));
                                 System.out.println("Нажмите любую клавишу, чтобы продолжить");
                                 scanPause.nextLine();
                                 break;
                             case 3:
                                 System.out.println("==МИНИМАЛЬНАЯ ЗАРПЛАТА ПО ОТДЕЛУ==");
-                                eBook.getMinSalaryOfDepart(dep);
+                                eBook.findMinSalaryOfDepart(dep);
                                 System.out.println("Нажмите любую клавишу, чтобы продолжить");
                                 scanPause.nextLine();
                                 break;
                             case 4:
                                 System.out.println("==МАКСИМАЛЬНАЯ ЗАРПЛАТА ПО ОТДЕЛУ==");
-                                eBook.getMaxSalaryOfDepart(dep);
+                                eBook.findMaxSalaryOfDepart(dep);
                                 System.out.println("Нажмите любую клавишу, чтобы продолжить");
                                 scanPause.nextLine();
                                 break;
                             case 5:
                                 System.out.println("==СРЕДНЯЯ ЗАРПЛАТА ПО ОТДЕЛУ==");
-                                System.out.println("Средняя зарплата по отделу" + dep + " - " + eBook.getAvgSalaryInDepart(dep));
+                                System.out.println("Средняя зарплата по отделу" + dep + " - " + eBook.findAvgSalaryInDepart(dep));
                                 System.out.println("Нажмите любую клавишу, чтобы продолжить");
                                 scanPause.nextLine();
                                 break;
@@ -153,7 +153,7 @@ public class Main {
                                 System.out.print("Введите величину изменения зп (в %) по отделу: ");
                                 Scanner scn3 = new Scanner(System.in);
                                 double percentInDep = scn3.nextInt();
-                                eBook.setIncreaseSalaryInDepart(dep, percentInDep);
+                                eBook.raiseSalaryInDepart(dep, percentInDep);
                                 System.out.println("Нажмите любую клавишу, чтобы продолжить");
                                 scanPause.nextLine();
                                 break;

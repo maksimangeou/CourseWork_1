@@ -18,6 +18,14 @@ public class EmployeeBook {
         System.out.println("Конец списка. Нажмите любую клавишу");
     }
 
+    public static int getIndex() {
+        return index;
+    }
+
+    public static void setIndex(int index) {
+        EmployeeBook.index = index;
+    }
+
     public void addEmployee() {
         String lastName, firstName, patronymicName;
         int department;
@@ -39,7 +47,7 @@ public class EmployeeBook {
             }
             System.out.println("Введите ЗП: ");
             salary = scn.nextDouble();
-            employee[index] = new Employee(lastName, firstName, patronymicName, department, salary);
+            employee[getIndex()] = new Employee(lastName, firstName, patronymicName, department, salary);
             System.out.println("Сотрудник добавлен.");
             System.out.println("Для продолжения нажмите любую клавишу");
         } else {
@@ -61,7 +69,7 @@ public class EmployeeBook {
     public boolean isEmptyIndex(Employee[] e) {
         for (int i = 0; i < e.length; i++) {
             if (e[i] == null) {
-                index = i;
+                setIndex(i);
                 return true;
             }
         }
@@ -73,7 +81,7 @@ public class EmployeeBook {
         System.out.println("Для продолжения нажмите любую клавишу.");
     }
 
-    public double getTotalSumSalary() {
+    public double countTotalSumSalary() {
         double totalSum = 0.0;
         for (Employee value : employee) {
             totalSum += value.getSalary();
@@ -81,7 +89,7 @@ public class EmployeeBook {
         return totalSum;
     }
 
-    public void getMinSalary() {
+    public void findMinSalary() {
         double minSalary = Integer.MAX_VALUE;
         for (Employee value : employee) {
             if (minSalary > value.getSalary()) {
@@ -96,7 +104,7 @@ public class EmployeeBook {
         }
     }
 
-    public void getMaxSalary() {
+    public void findMaxSalary() {
         double maxSalary = Integer.MIN_VALUE;
         for (Employee value : employee) {
             if (maxSalary < value.getSalary()) {
@@ -111,13 +119,13 @@ public class EmployeeBook {
         }
     }
 
-    public double getAvgSalary() {
-        double avgSal = getTotalSumSalary() / (Employee.getNextID() - 1);
+    public double findAvgSalary() {
+        double avgSal = countTotalSumSalary() / (Employee.getNextID() - 1);
         avgSal = Math.ceil(avgSal * 100) / 100;
         return avgSal;
     }
 
-    public void getOnlyFIOName() {
+    public void getOnlyName() {
         String str;
         for (Employee value : employee) {
             str = value.getLastName() + " " + value.getFirstName() + " " + value.getPatronymicName();
@@ -125,7 +133,7 @@ public class EmployeeBook {
         }
     }
 
-    public void setIncreaseSalary(double percent) {
+    public void raiseSalary(double percent) {
         for (Employee value : employee) {
             double increase = value.getSalary() * (100 + percent) / 100;
             value.setSalary(increase);
@@ -144,7 +152,7 @@ public class EmployeeBook {
             }
     }
 
-    public double getTotalSumOfDepart(int d) {
+    public double countTotalSumOfDepart(int d) {
         double totalSum = 0.0;
         for (Employee value : employee) {
             if (value.getDepartment() == d) {
@@ -154,7 +162,7 @@ public class EmployeeBook {
         return totalSum;
     }
 
-    public void getMinSalaryOfDepart(int d) {
+    public void findMinSalaryOfDepart(int d) {
         double minSalary = Integer.MAX_VALUE;
         for (Employee value : employee) {
             if (value.getDepartment() == d) {
@@ -172,7 +180,7 @@ public class EmployeeBook {
         }
     }
 
-    public void getMaxSalaryOfDepart(int d) {
+    public void findMaxSalaryOfDepart(int d) {
         double maxSalary = Integer.MIN_VALUE;
         for (Employee value : employee) {
             if (value.getDepartment() == d) {
@@ -190,16 +198,16 @@ public class EmployeeBook {
         }
     }
 
-    public double getAvgSalaryInDepart(int d) {
+    public double findAvgSalaryInDepart(int d) {
         int i = 0;
         for (Employee value : employee) {
             if (value.getDepartment() == d) i++;
         }
-        double avgSal = getTotalSumOfDepart(d) / i;
+        double avgSal = countTotalSumOfDepart(d) / i;
         return Math.ceil(avgSal * 100) / 100;
     }
 
-    public void setIncreaseSalaryInDepart(int d, double percent) {
+    public void raiseSalaryInDepart(int d, double percent) {
         for (Employee value : employee) {
             if (value.getDepartment() == d) {
                 double increase = value.getSalary() * (100 + percent) / 100;
