@@ -1,27 +1,28 @@
 import java.util.Objects;
 
 public class Employee {
-    //объявление переменных класса
+    private int id;
     private String firstName;
     private String lastName;
     private String patronymicName;
     private int department;
     private double salary;
-    private int id;
-    //статическая переменная
     private static int nextID = 1;
 
-    //конструктор
     public Employee(String lastName, String firstName, String patronymicName, int department, double salary) {
-        setId();
-        setLastName(lastName);
-        setFirstName(firstName);
-        setPatronymicName(patronymicName);
-        setDepartment(department);
-        setSalary(salary);
+        this.id = nextID;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.patronymicName = patronymicName;
+        this.department = department;
+        this.salary = salary;
+        nextID++;
     }
 
-    //геттеры
+    public int getId() {
+        return id;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -42,18 +43,12 @@ public class Employee {
         return salary;
     }
 
-    public int getId() {
-        return id;
-    }
-
     public static int getNextID() {
         return nextID;
     }
 
-    //сеттеры
-    public void setId() {
-        id = getNextID();
-        setNextID();
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setLastName(String lastName) {
@@ -80,34 +75,31 @@ public class Employee {
         nextID++;
     }
 
-    //метод проверки корректности ввода номера отдела
     public static boolean isDepartmentTrue(int department) {
         return department <= 5 && department >= 1;
     }
-
-    //equals
-
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return department == employee.department &&
-                Double.compare(salary, employee.salary) == 0 &&
-                id == employee.id &&
-                Objects.equals(firstName, employee.firstName) &&
-                Objects.equals(lastName, employee.lastName) &&
-                Objects.equals(patronymicName, employee.patronymicName);
+        return id == employee.id && department == employee.department && Double.compare(salary, employee.salary) == 0 && Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName) && Objects.equals(patronymicName, employee.patronymicName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, patronymicName, department, salary, id);
+        return Objects.hash(id, firstName, lastName, patronymicName, department, salary);
     }
 
-    //toString
     @Override
     public String toString() {
-        return id + " " + lastName + " " + firstName + " " + patronymicName + " " + department + " " + salary;
+        return "Employee{" +
+               "id=" + id +
+               ", firstName='" + firstName + '\'' +
+               ", lastName='" + lastName + '\'' +
+               ", patronymicName='" + patronymicName + '\'' +
+               ", department=" + department +
+               ", salary=" + salary +
+               '}';
     }
 }
