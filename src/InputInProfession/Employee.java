@@ -1,3 +1,5 @@
+package InputInProfession;
+
 import java.util.Objects;
 
 public class Employee {
@@ -93,13 +95,13 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee{" +
-               "id=" + id +
-               ", firstName='" + firstName + '\'' +
-               ", lastName='" + lastName + '\'' +
-               ", patronymicName='" + patronymicName + '\'' +
-               ", department=" + department +
-               ", salary=" + salary +
-               '}';
+        return "InputInProfession.Employee{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", patronymicName='" + patronymicName + '\'' +
+                ", department=" + department +
+                ", salary=" + salary +
+                '}';
     }
 }
